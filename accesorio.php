@@ -1,5 +1,7 @@
 <?php include('template/header.php'); ?>
 
+
+
 <?php
 // print_r($_POST);
 
@@ -32,7 +34,7 @@ switch ($accion) {
         break;
 
     case "editarAccesorio":
-        $sentenciaSQL = $conexion->prepare("UPDATE accesorio SET  nombreAccesorio=:nombreAccesorio, cantidadStockA=:cantidadStockA,  precioUnidadA=:precioUnidad, fechaA=:fechaA WHERE idAccesorio=:idAccesorio");
+        $sentenciaSQL = $conexion->prepare("UPDATE  accesorio  SET nombreAccesorio=:nombreAccesorio, cantidadStockA=:cantidadStockA,  precioUnidadA=:precioUnidadA, fechaA=:fechaA WHERE idAccesorio=:idAccesorio");
         $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
         $sentenciaSQL->bindParam(':nombreAccesorio', $nombreAccesorio);
         $sentenciaSQL->bindParam(':cantidadStockA', $cantidadStockA);
@@ -41,7 +43,10 @@ switch ($accion) {
         $sentenciaSQL->execute();
 
         header("Location:accesorio.php");
+
         // echo "presionado editarAccesorio";
+
+
         break;
 
     case "editar":
@@ -111,8 +116,8 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <nav class="navbar">
             <div class="container-fluid">
                 <form class="d-flex" method="POST" role="Buscar">
-                    <input class="form-control me-2" type="search" id="campo" name="campo" placeholder="Busca un Accesorio" aria-label="buscar">
-                    <button type="submit" id="enviar" name="enviar" class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    <input class="form-control me-2" type="search" " placeholder=" Busca un Accesorio" aria-label="buscar">
+                    <button type="submit" name="accion" value="buscar" class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>

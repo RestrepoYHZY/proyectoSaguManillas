@@ -28,8 +28,8 @@
         <nav class="navbar">
             <div class="container-fluid">
                 <form class="d-flex" method="POST" role="Buscar">
-                    <input class="form-control me-2" type="search" id="campo" name="campo" placeholder="Busca un Accesorio" aria-label="buscar">
-                    <button type="submit" id="enviar" name="enviar" class="btn btn-outline-secondary" type="submit">Buscar</button>
+                    <input class="form-control me-2" type="search" placeholder="Busca un Accesorio" aria-label="buscar">
+                    <button type="submit" class="btn btn-outline-secondary" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>

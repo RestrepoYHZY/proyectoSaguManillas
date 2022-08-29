@@ -1,13 +1,13 @@
-<!-- <?php
-        // session_start();
-        // if (!isset($_SESSION['usuario'])) {
-        //     header('Location:login.php');
-        // } else {
-        //     if ($_SESSION['usuario'] == 'ok') {
-        //         $nombreUsuario = $_SESSION['nombreUsuario'];
-        //     }
-        // }
-        ?> -->
+<?php
+session_start();
+if (!isset($_SESSION['usuario'])) {
+    header('Location:login.php');
+} else {
+    if ($_SESSION['usuario'] == 'ok') {
+        $nombreUsuario = $_SESSION['nombreUsuario'];
+    }
+}
+?>
 
 
 <!DOCTYPE html>
@@ -24,6 +24,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
@@ -31,7 +32,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container-fluid">
             <ul class="navbar-nav">
-                <a class="navbar-brand nav-link  " href="login.php">
+                <a class="navbar-brand nav-link  " href="#">
                     <img src="./image/logoSagu.png" alt="logoSagu" width="35" height="35" class="d-inline-block align-text-center">
                     Sagu Manillas
                 </a>
@@ -48,7 +49,7 @@
                     <a class="nav-link" href="clientes.php">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cerrar</a>
+                    <a class="nav-link" href="cerrar.php">Cerrar</a>
                 </li>
             </ul>
         </div>

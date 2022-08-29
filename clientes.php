@@ -94,7 +94,6 @@
                                     <button type="submit" name="accion" value="cancelar" class="btn btn-warning">Cancelar </button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
