@@ -24,20 +24,11 @@
 
 <div class="container col-12 mt-2">
     <div class="row">
-        <!--====================== Buscador========================-->
-        <nav class="navbar">
-            <div class="container-fluid">
-                <form class="d-flex" method="POST" role="Buscar">
-                    <input class="form-control me-2" type="search" placeholder="Busca un Accesorio" aria-label="buscar">
-                    <button type="submit" class="btn btn-outline-secondary" type="submit">Buscar</button>
-                </form>
-            </div>
-        </nav>
-        <!--======================Fin Buscador========================-->
+
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-hover  align-center" id="tblAccesorio">
+                    <table class="table table-hover  align-center" id="tablaMaterial">
                         <thead>
 
                             <tr>
@@ -140,5 +131,19 @@
                 </div>
             </div>
 
+            <script>
+                var tabla = document.querySelector('#tablaMaterial');
+                var dataTable = new DataTable(tablaMaterial, {
+                    perPage: 5,
+                    perPageSelect: [5, 10, 15, 20],
+
+                    labels: {
+                        placeholder: "Buscar Material",
+                        perPage: "{select} ",
+                        noRows: "Material no Encontrado",
+                        info: "Mostrando registros del {start} al {end} de {rows} Registros",
+                    }
+                });
+            </script>
 
             <?php include('template/footer.php'); ?>

@@ -112,20 +112,10 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container col-12 mt-2">
     <div class="row">
-        <!--====================== Buscador========================-->
-        <nav class="navbar">
-            <div class="container-fluid">
-                <form class="d-flex" method="POST" role="Buscar">
-                    <input class="form-control me-2" type="search" " placeholder=" Busca un Accesorio" aria-label="buscar">
-                    <button type="submit" name="accion" value="buscar" class="btn btn-outline-secondary" type="submit">Buscar</button>
-                </form>
-            </div>
-        </nav>
-        <!--======================Fin Buscador========================-->
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-hover  align-center" id="tblAccesorio">
+                    <table class="table table-hover  align-center" id="tablaAccesorios">
                         <thead>
 
                             <tr>
@@ -225,4 +215,18 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 </div>
             </div>
 
+            <script>
+                var tabla = document.querySelector('#tablaAccesorios');
+                var dataTable = new DataTable(tablaAccesorios, {
+                    perPage: 5,
+                    perPageSelect: [5, 10, 15, 20],
+
+                    labels: {
+                        placeholder: "Buscar Accesorio",
+                        perPage: "{select} ",
+                        noRows: "Accesorio no Encontrado",
+                        info: "Mostrando Registros del {start} al {end} de {rows} Registros",
+                    }
+                });
+            </script>
             <?php include('template/footer.php'); ?>

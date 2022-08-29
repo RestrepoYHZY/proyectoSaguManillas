@@ -8,21 +8,13 @@
 
 <!--====================== TABLA DE CLIENTES=========================-->
 
-<div class="container col-12 mt-1">
+<div class="container col-12 mt-2">
     <div class="row">
-        <nav class="navbar">
-            <div class="container-fluid">
-                <form class="d-flex" method="POST" role="Buscar">
-                    <input class="form-control me-2" type="search" placeholder="Busca un Cliente" aria-label="buscar">
-                    <button type="submit" class="btn btn-outline-secondary" type="submit">Buscar</button>
-                </form>
-            </div>
-        </nav>
-        <!--======================Fin Buscador========================-->
+
         <div class="col-md-8">
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-hover  align-center">
+                    <table class="table table-hover  align-center" id="tablaClientes">
                         <thead>
                             <tr>
                                 <th scope="col">Codigo</th>
@@ -100,5 +92,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var tabla = document.querySelector('#tablaClientes');
+        var dataTable = new DataTable(tablaClientes, {
+            perPage: 5,
+            perPageSelect: [5, 10, 15, 20],
+
+            labels: {
+                placeholder: "Buscar Cliente",
+                perPage: "{select} ",
+                noRows: "Cliente no Encontrado",
+                info: "Mostrando Registros del {start} al {end} de {rows} Registros",
+            }
+        });
+    </script>
 
     <?php include('template/footer.php'); ?>
