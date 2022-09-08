@@ -29,7 +29,6 @@
                     <div class="card-body">
                         <table class="table table-hover  align-center" id="tablaVentas">
                             <thead>
-
                                 <tr>
                                     <th scope="col">Codigo</th>
                                     <th scope="col">Cliente</th>
@@ -39,7 +38,6 @@
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Acción</th>
                                 </tr>
-
                             </thead>
 
 
@@ -51,7 +49,7 @@
                             <div class=" col-12">
                                 <tbody>
                                     <tr>
-                                        <td></td>
+                                        <td scope="row"></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>

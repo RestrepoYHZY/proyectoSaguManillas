@@ -30,22 +30,20 @@ switch ($accion) {
         $sentenciaSQL->execute();
 
         header("Location:accesorio.php");
-        // echo "Presiono agregarAccesorio";
+        //echo "Presiono agregarAccesorio";
         break;
 
     case "editarAccesorio":
         $sentenciaSQL = $conexion->prepare("UPDATE  accesorio  SET nombreAccesorio=:nombreAccesorio, cantidadStockA=:cantidadStockA,  precioUnidadA=:precioUnidadA, fechaA=:fechaA WHERE idAccesorio=:idAccesorio");
-        $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
         $sentenciaSQL->bindParam(':nombreAccesorio', $nombreAccesorio);
         $sentenciaSQL->bindParam(':cantidadStockA', $cantidadStockA);
         $sentenciaSQL->bindParam(':precioUnidadA', $precioUnidadA);
         $sentenciaSQL->bindParam(':fechaA', $fechaA);
+        $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
         $sentenciaSQL->execute();
 
         header("Location:accesorio.php");
-
-        // echo "presionado editarAccesorio";
-
+        //echo "presionado editarAccesorio";
 
         break;
 
@@ -55,23 +53,27 @@ switch ($accion) {
         $sentenciaSQL->execute();
         $accesorio = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
-        $idAccesorio = $accesorio['idAccesorio'];
+
         $nombreAccesorio = $accesorio['nombreAccesorio'];
         $cantidadStockA = $accesorio['cantidadStockA'];
         $precioUnidadA = $accesorio['precioUnidadA'];
         $fechaA = $accesorio['fechaA'];
 
-
         // echo "presionado editar";
         break;
 
     case "borrar":
+
         $sentenciaSQL = $conexion->prepare("DELETE FROM accesorio WHERE idAccesorio=:idAccesorio");
         $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
         $sentenciaSQL->execute();
 
+
+
         header("Location:accesorio.php");
+
         // echo "presionado borrar";
+
         break;
 
 
@@ -88,6 +90,18 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 //Buscar concidencias
 
 ?>
+<!--====================== Alerta de eliminar =======================-->
+<script type="text/javascript">
+    function ConfirmDelete() {
+        var respuesta = confirm("¿Estás seguro que deseas eliminar el accesorio?");
+
+        if (respuesta === true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 
 <!--====================== TITULO Y NAV =======================-->
 <div class="container col-12 mb-1">
@@ -149,7 +163,7 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                                                 <input type="hidden" name="idAccesorio" id="idAccesorio" value="<?php echo $accesorio['idAccesorio']; ?>">
                                                 <button type="submit" name="accion" value="editar" class="btn btn-small btn-primary "><i class=' bx bx-edit-alt'></i></button>
-                                                <button type="submit" name="accion" value="borrar" class="btn btn-small btn-danger"><i class='bx bx-trash icon'></i></button>
+                                                <button type="submit" onclick="return ConfirmDelete()" name="accion" value="borrar" class="btn btn-small btn-danger"><i class='bx bx-trash icon'></i></button>
 
                                                 <!-- <input type="submit" name="accion" value="borrar" class="btn btn-small btn-danger" <i class='bx bx-trash icon'></i></button> -->
 
@@ -204,7 +218,9 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                                 <div class="form-group text-center mt-3">
                                     <button type="submit" name="accion" <?php echo ($accion == "editar") ? 'disabled' : ''; ?> value="agregarAccesorio" class="btn btn-primary">Añadir Accesorio </button>
+
                                     <button type="submit" name="accion" <?php echo ($accion != "editar") ? 'disabled' : ''; ?> value="editarAccesorio" class="btn btn-danger">Editar Accesorio </button>
+
                                     <button type="submit" name="accion" <?php echo ($accion != "editar") ? 'disabled' : ''; ?> value="cancelar" class="btn btn-warning">Cancelar </button>
                                 </div>
                             </form>
@@ -229,4 +245,6 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     }
                 });
             </script>
+
+
             <?php include('template/footer.php'); ?>
