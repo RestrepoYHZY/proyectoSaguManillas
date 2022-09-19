@@ -1,7 +1,5 @@
 <?php include('template/header.php'); ?>
 
-
-
 <?php
 // print_r($_POST);
 
@@ -13,8 +11,6 @@ $precioUnidadA = (isset($_POST["precioUnidadA"])) ? $_POST["precioUnidadA"] : ""
 $accion = (isset($_POST["accion"])) ? $_POST["accion"] : "";
 
 include("./admin/config/db.php");
-
-
 
 
 
