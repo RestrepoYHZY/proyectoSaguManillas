@@ -236,7 +236,7 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     labels: {
                         placeholder: "Buscar Accesorio",
                         perPage: "{select} ",
-                        noRows: "Accesorio no Encontrado",
+                        noRows: "Accesorio NO encontrado",
                         info: "Mostrando Registros del {start} al {end} de {rows} Registros",
                     }
                 });

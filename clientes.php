@@ -214,7 +214,7 @@ $listclientes = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             labels: {
                 placeholder: "Buscar Cliente",
                 perPage: "{select} ",
-                noRows: "Cliente no Encontrado",
+                noRows: "Cliente NO encontrado",
                 info: "Mostrando Registros del {start} al {end} de {rows} Registros",
             }
         });
