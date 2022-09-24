@@ -25,25 +25,62 @@ switch ($accion) {
         $sentenciaSQL->execute();
 
         // echo "Boton agregar Presionado";
+        header("Location:material.php");
         break;
 
     case "ModificarMaterial":
+
+        $sentenciaSQL = $conexion->prepare("UPDATE  materia_prima  SET nombreMaterial=:nombreMaterial, color=:color, cantidadStockM=:cantidadStockM,  precioUnidadM=:precioUnidadM, fechaM=:fechaM WHERE idMateria_prima=:idMateria_prima");
+        $sentenciaSQL->bindParam(':nombreMaterial', $nombreMaterial);
+        $sentenciaSQL->bindParam(':color', $color);
+        $sentenciaSQL->bindParam(':cantidadStockM', $cantidadStockM);
+        $sentenciaSQL->bindParam(':precioUnidadM', $precioUnidadM);
+        $sentenciaSQL->bindParam(':fechaM', $fechaM);
+        $sentenciaSQL->bindParam(':idMateria_prima', $idMateria_prima);
+        $query_execute = $sentenciaSQL->execute();
+
+        if ($query_execute) {
+            echo "success";
+        } else {
+            echo "error";
+        }
+
+
+
         echo "Boton Modificar Presionado";
+        // header("Location:material.php");
         break;
 
-    case "CancelarMaterial":
-        echo "Boton Cancelar Presionado";
-        break;
 
     case "editar":
-        echo "Boton editar Presionado";
+        $sentenciaSQL = $conexion->prepare("SELECT * FROM materia_prima WHERE idMateria_prima=:idMateria_prima ");
+        $sentenciaSQL->bindParam(':idMateria_prima', $idMateria_prima);
+        $sentenciaSQL->execute();
+        $materia = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+        $nombreMaterial = $materia['nombreMaterial'];
+        $color = $materia['color'];
+        $precioUnidadM = $materia['precioUnidadM'];
+        $cantidadStockM = $materia['cantidadStockM'];
+        $fechaM = $materia['fechaM'];
+
+
+        //echo "Boton editar Presionado";
         break;
+
+
 
     case "borrar":
         $sentenciaSQL = $conexion->prepare("DELETE FROM materia_prima WHERE idMateria_prima=:idMateria_prima");
         $sentenciaSQL->bindParam(':idMateria_prima', $idMateria_prima);
         $sentenciaSQL->execute();
         // echo "Boton borrar Presionado";
+        header("Location:material.php");
+        break;
+
+    case "CancelarMaterial":
+        header("Location:material.php");
+        //echo "Boton Cancelar Presionado";
         break;
 }
 
@@ -124,7 +161,7 @@ $listaMaterial = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                                         <td><?php echo $material['nombreMaterial']; ?></td>
                                         <td><?php echo $material['color']; ?></td>
                                         <td><?php echo $material['cantidadStockM']; ?></td>
-                                        <td><?php echo $material['precioUnidadM']; ?></td>
+                                        <td>$<?php echo $material['precioUnidadM']; ?></td>
                                         <td><?php echo $material['fechaM']; ?></td>
                                         <td>
                                             <form method="post">
@@ -161,39 +198,40 @@ $listaMaterial = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                             <form method="POST" class="justify-content-right">
                                 <div class=" form-group mb-3">
                                     <label for="idMateria_prima">ID Material</label>
-                                    <input type="text" name="idMateria_prima" id="idMateria_prima" class="form-control " disabled>
+                                    <input type="text" value="<?php echo $idMateria_prima ?>" name="idMateria_prima" id="idMateria_prima" class="form-control " disabled>
                                 </div>
 
                                 <div class=" form-group mb-3">
                                     <label for="nombreMaterial">Nombre Material</label>
-                                    <input type="text" name="nombreMaterial" id="nombreMaterial" class="form-control">
+                                    <input type="text" value="<?php echo $nombreMaterial ?>" name="nombreMaterial" id="nombreMaterial" class="form-control" required>
                                 </div>
 
                                 <div class="form-group  mb-3">
                                     <label class="form-label" for="color">Color</label>
-                                    <input type="text" name="color" id="color" class="form-control" min="0">
+                                    <input type="text" value="<?php echo $color ?>" name="color" id="color" class="form-control" min="0" required>
                                 </div>
 
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="cantidadStockM">Cantidad</label>
-                                    <input type="number" name="cantidadStockM" id="cantidadStockM" class="form-control" min="1">
+                                    <input type="number" value="<?php echo $cantidadStockM ?>" name="cantidadStockM" id="cantidadStockM" class="form-control" min="1" required>
                                 </div>
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="precioUnidadM">Precio</label>
-                                    <input type="number" name="precioUnidadM" id="precioUnidadM" class="form-control" min="1">
+                                    <input type="number" value="<?php echo $precioUnidadM; ?>" name="precioUnidadM" id="precioUnidadM" class="form-control" min="1" required>
                                 </div>
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="fechaM">Fecha</label>
-                                    <input type="date" class="form-control" <input type="number" id="fechaM" name="fechaM" for='fechaM' value="2022-07-22" min="2000-01-01" max="2100-12-31"></input>
+                                    <input type="date" class="form-control" type="number" value="<?php echo $fechaM; ?>" id="fechaM" name="fechaM" for='fechaM' required></input>
                                 </div>
 
 
+
                                 <div class="form-group text-center mt-3">
-                                    <button type="submit" name="accion" value="AgregarMaterial" class="btn btn-primary">Añadir Material </button>
+                                    <button type="submit" name="accion" <?php echo ($accion == "editar") ? 'disabled' : ''; ?> value="AgregarMaterial" class="btn btn-primary">Añadir Material </button>
 
-                                    <button type="submit" name="accion" value="ModificarMaterial" class="btn btn-danger">Editar Material</button>
+                                    <button type="submit" name="accion" <?php echo ($accion != "editar") ? 'disabled' : ''; ?> value="ModificarMaterial" class="btn btn-danger">Editar Material </button>
 
-                                    <button type="submit" name="accion" value="CancelarMaterial" class="btn btn-warning">Cancelar </button>
+                                    <button type="submit" name="accion" <?php echo ($accion != "editar") ? 'disabled' : ''; ?> value="CancelarMaterial" class="btn btn-warning">Cancelar </button>
                                 </div>
                             </form>
 

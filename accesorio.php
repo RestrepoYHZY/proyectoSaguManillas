@@ -152,7 +152,7 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                                         <td scope="row"><?php echo $accesorio['idAccesorio']; ?></td>
                                         <td><?php echo $accesorio['nombreAccesorio']; ?></td>
                                         <td><?php echo $accesorio['cantidadStockA']; ?></td>
-                                        <td><?php echo $accesorio['precioUnidadA']; ?></td>
+                                        <td>$<?php echo $accesorio['precioUnidadA']; ?></td>
                                         <td><?php echo $accesorio['fechaA']; ?></td>
                                         <td>
                                             <form method="post">
@@ -204,11 +204,11 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="precioUnidadA">precioUnidadA</label>
-                                    <input type="number" <input type="number" value="<?php echo $precioUnidadA; ?>" name="precioUnidadA" id="precioUnidadA" class="form-control" min="1" required>
+                                    <input type="number" type="number" value="<?php echo $precioUnidadA; ?>" name="precioUnidadA" id="precioUnidadA" class="form-control" min="1" required>
                                 </div>
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="fechaA">Fecha</label>
-                                    <input type="date" class="form-control" type="number" value="<?php echo $fechaA; ?>" id="fechaA" name="fechaA" for='fechaA' value="2022-07-22" min="2000-01-01" max="2100-12-31" required></input>
+                                    <input type="date" class="form-control" type="number" value="<?php echo $fechaA; ?>" id="fechaA" name="fechaA" for='fechaA' required></input>
                                 </div>
 
 
