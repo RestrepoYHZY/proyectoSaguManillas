@@ -36,23 +36,23 @@ if (!isset($_SESSION['usuario'])) {
         <div class="container-fluid">
             <ul class="navbar-nav">
                 <a class="navbar-brand nav-link  " href="#">
-                    <img src="./image/logoSagu.png" alt="logoSagu" width="35" height="35" class="d-inline-block align-text-center">
+                    <img src="./image/logoSagu.png" alt="logoSagu" width="38" height="38" class="d-inline-block align-text-center">
                     Sagu Manillas
                 </a>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="inicio.php">Inicio</a>
+                    <a class="nav-link fs-5" aria-current="page" href="inicio.php">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="ventas.php">Ventas</a>
+                    <a class="nav-link fs-5 " aria-current="page" href="ventas.php">Ventas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="accesorio.php">Inventario</a>
+                    <a class="nav-link fs-5" href="accesorio.php">Inventario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="clientes.php">Clientes</a>
+                    <a class="nav-link fs-5" href="clientes.php">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cerrar.php">Cerrar</a>
+                    <a class="nav-link fs-5" href="cerrar.php">Cerrar</a>
                 </li>
             </ul>
         </div>

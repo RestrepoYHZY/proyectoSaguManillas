@@ -97,6 +97,10 @@ $listclientes = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     }
 </script>
 
+
+<div class="container col-12 mb-1">
+    <h1>Clientes</h1>
+</div>
 <!--=================   TABLA DE LISTA DE CLIENTE===================-->
 
 <div class="container col-12 mt-2">

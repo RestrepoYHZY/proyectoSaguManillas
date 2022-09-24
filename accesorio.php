@@ -186,7 +186,7 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                         </div>
 
                         <div class="col-12">
-                            <form method="POST" class="justify-content-right">
+                            <form method="POST" enctype="multipart/form-data" class="justify-content-right">
                                 <div class=" form-group mb-3">
                                     <label for="idAccesorio">ID Accesorio</label>
                                     <input type="text" value="<?php echo $idAccesorio; ?>" name="idAccesorio" id="idAccesorio" class="form-control " disabled>
@@ -194,21 +194,21 @@ $listAccesorio = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                                 <div class=" form-group mb-3">
                                     <label for="nombreAccesorio">Nombre Accesorio</label>
-                                    <input type="text" value="<?php echo $nombreAccesorio; ?>" name="nombreAccesorio" id="nombreAccesorio" class="form-control">
+                                    <input type="text" value="<?php echo $nombreAccesorio; ?>" name="nombreAccesorio" id="nombreAccesorio" class="form-control" required>
                                 </div>
 
                                 <div class="form-group  mb-3">
                                     <label class="form-label" for="cantidadStockA">cantidadStockA</label>
-                                    <input type="number" value="<?php echo $cantidadStockA; ?>" name="cantidadStockA" id="cantidadStockA" class="form-control" min="0">
+                                    <input type="number" value="<?php echo $cantidadStockA; ?>" name="cantidadStockA" id="cantidadStockA" class="form-control" min="0" required>
                                 </div>
 
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="precioUnidadA">precioUnidadA</label>
-                                    <input type="number" <input type="number" value="<?php echo $precioUnidadA; ?>" name="precioUnidadA" id="precioUnidadA" class="form-control" min="1">
+                                    <input type="number" <input type="number" value="<?php echo $precioUnidadA; ?>" name="precioUnidadA" id="precioUnidadA" class="form-control" min="1" required>
                                 </div>
                                 <div class=" form-group mb-3">
                                     <label class="form-label" for="fechaA">Fecha</label>
-                                    <input type="date" class="form-control" <input type="number" value="<?php echo $fechaA; ?>" id="fechaA" name="fechaA" for='fechaA' value="2022-07-22" min="2000-01-01" max="2100-12-31"></input>
+                                    <input type="date" class="form-control" type="number" value="<?php echo $fechaA; ?>" id="fechaA" name="fechaA" for='fechaA' value="2022-07-22" min="2000-01-01" max="2100-12-31" required></input>
                                 </div>
 
 

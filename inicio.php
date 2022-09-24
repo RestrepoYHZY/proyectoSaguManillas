@@ -14,22 +14,22 @@
 
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="./image/img2.png" class="rounded float-start" alt="...">
-                </div>
-            </div>
-            <div class="col">
-                <div class="card shadow-sm">
                     <img src="./image/img4.png" class="rounded float-start" alt="...">
                 </div>
             </div>
             <div class="col">
                 <div class="card shadow-sm">
-                    <img src="./image/img5.png" class="rounded float-start" alt="...">
+                    <img src="./image/img2.png" class="rounded float-start" alt="...">
                 </div>
             </div>
             <div class="col">
                 <div class="card shadow-sm">
                     <img src="./image/img6.png" class="rounded float-start" alt="...">
+                </div>
+            </div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="./image/img5.png" class="rounded float-start" alt="...">
                 </div>
             </div>
             <div class="col">
