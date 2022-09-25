@@ -5,9 +5,11 @@
 
 // print_r($_POST);
 
+$idDetalle_venta = (isset($_POST["idDetalle_venta"])) ? $_POST["idDetalle_venta"] : "";
+$cantidadVenta = (isset($_POST["cantidadVenta"])) ? $_POST["cantidadVenta"] : "";
+$idAccesorio = (isset($_POST["idAccesorio"])) ? $_POST["idAccesorio"] : "";
 $idRegistro_venta = (isset($_POST["idRegistro_venta"])) ? $_POST["idRegistro_venta"] : "";
-$fechaVenta = (isset($_POST["fechaVenta"])) ? $_POST["fechaVenta"] : "";
-$idCliente = (isset($_POST["idCliente"])) ? $_POST["idCliente"] : "";
+$precioTotal = (isset($_POST["precioTotal"])) ? $_POST["precioTotal"] : "";
 
 $accion = (isset($_POST["accion"])) ? $_POST["accion"] : "";
 
@@ -18,37 +20,44 @@ include("./admin/config/db.php");
 switch ($accion) {
 
     case "agregarVenta":
-        $sentenciaSQL = $conexion->prepare(" INSERT INTO registro_venta (fechaVenta, idCliente) values
-        (:fechaVenta,:idCliente);");
-        $sentenciaSQL->bindParam(':fechaVenta', $fechaVenta);
-        $sentenciaSQL->bindParam(':idCliente', $idCliente);
+        $sentenciaSQL = $conexion->prepare("INSERT INTO detalle_venta (cantidadVenta, idRegistro_venta, idAccesorio, precioTotal)
+        values (:cantidadVenta,:idAccesorio,:idRegistro_venta,:precioTotal);");
+        $sentenciaSQL->bindParam(':cantidadVenta', $cantidadVenta);
+        $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
+        $sentenciaSQL->bindParam(':idRegistro_venta', $idRegistro_venta);
+        $sentenciaSQL->bindParam(':precioTotal', $precioTotal);
         $sentenciaSQL->execute();
 
-        header("Location:ventas.php");
+        header("Location:detalleVenta.php");
         //echo "Presiono agregarAccesorio";
         break;
 
     case "editarVenta":
-        $sentenciaSQL = $conexion->prepare("UPDATE  registro_venta  SET idCliente=:idCliente, fechaVenta=:fechaVenta WHERE idRegistro_venta=:idRegistro_venta");
-        $sentenciaSQL->bindParam(':idCliente', $idCliente);
-        $sentenciaSQL->bindParam(':fechaVenta', $fechaVenta);
+        $sentenciaSQL = $conexion->prepare("UPDATE  detalle_venta  SET cantidadVenta=:cantidadVenta, idAccesorio=:idAccesorio, idRegistro_venta=:idRegistro_venta, precioTotal=:precioTotal WHERE idDetalle_venta=:idDetalle_venta");
+        $sentenciaSQL->bindParam(':idDetallea_venta', $idDetallea_venta);
+        $sentenciaSQL->bindParam(':cantidadVenta', $cantidadVenta);
         $sentenciaSQL->bindParam(':idRegistro_venta', $idRegistro_venta);
+        $sentenciaSQL->bindParam(':idAccesorio', $idAccesorio);
+        $sentenciaSQL->bindParam(':precioTotal', $precioTotal);
         $sentenciaSQL->execute();
 
-        header("Location:ventas.php");
+        header("Location:detalleVenta.php");
         //echo "presionado editarAccesorio";
 
         break;
 
     case "editar":
-        $sentenciaSQL = $conexion->prepare("SELECT * FROM registro_venta WHERE idRegistro_venta=:idRegistro_venta");
-        $sentenciaSQL->bindParam(':idRegistro_venta', $idRegistro_venta);
+        $sentenciaSQL = $conexion->prepare("SELECT * FROM detalle_venta WHERE idDetalle_venta=:idDetalle_venta");
+        $sentenciaSQL->bindParam(':idDetalle_venta', $idDetalle_venta);
         $sentenciaSQL->execute();
-        $venta = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+        $Detalleventa = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
 
-        $idCliente = $venta['idCliente'];
-        $fechaVenta = $venta['fechaVenta'];
+        $idDetallea_venta = $venta['idDetalle_venta'];
+        $idAccesorio = $venta['idAccesorio'];
+        $cantidadVenta = $venta['cantidadVenta'];
+        $precioTotal = $venta['precioTotal'];
+        $idRegistro_venta = $venta['idRegistro_venta'];
 
         // echo "presionado editar";
         break;
@@ -61,7 +70,7 @@ switch ($accion) {
 
 
 
-        header("Location:ventas.php");
+        header("Location:detalleVenta.php");
 
         // echo "presionado borrar";
 
@@ -69,14 +78,14 @@ switch ($accion) {
 
 
     case "cancelar":
-        header("Location:ventas.php");
+        header("Location:detalleVenta.php");
         // echo "presionado cancelar";
         break;
 }
 //listar los ventas
-$sentenciaSQL = $conexion->prepare("SELECT * FROM registro_venta");
+$sentenciaSQL = $conexion->prepare("SELECT * FROM detalle_venta");
 $sentenciaSQL->execute();
-$listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+$listDetalleVenta = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 //Buscar concidencias
 
@@ -86,7 +95,7 @@ $listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 <!--====================== Alerta de eliminar =======================-->
 <script type="text/javascript">
     function ConfirmDelete() {
-        var respuesta = confirm("¿Estás seguro que deseas eliminar la venta?");
+        var respuesta = confirm("¿Estás seguro que deseas eliminar detalle de venta?");
 
         if (respuesta === true) {
             return true;
@@ -105,10 +114,10 @@ $listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
     <div class="container ">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" href="ventas.php">Ventas</a>
+                <a class="nav-link " href="ventas.php">Ventas</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link " aria-current="page" href="detalleVenta.php">Detalle de Venta</a>
+                <a class="nav-link active" aria-current="page" href="detalleVenta.php">Detalle de Venta</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link " aria-current="page" href="listVentas.php">Lista de Ventas</a>
@@ -130,8 +139,10 @@ $listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                             <tr>
                                 <th scope="col">Codigo</th>
-                                <th scope="col">ID Cliente</th>
-                                <th scope="col">Fecha</th>
+                                <th scope="col">ID Registro Venta</th>
+                                <th scope="col">ID Accesorio</th>
+                                <th scope="col">Cantidad Venta</th>
+                                <th scope="col">Precio Total</th>
                                 <th scope="col">Acción</th>
                             </tr>
 
@@ -145,18 +156,22 @@ $listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                         <div class=" col-12">
                             <tbody>
-                                <?php foreach ($listVentas as $ventas) { ?>
+                                <?php foreach ($listDetalleVenta as $detalleVenta) { ?>
                                     <tr>
-                                        <td scope="row"><?php echo $ventas['idRegistro_venta']; ?></td>
-                                        <td><?php echo $ventas['idCliente']; ?></td>
-                                        <td><?php echo $ventas['fechaVenta']; ?></td>
+                                        <td scope="row"><?php echo $detalleVenta['idDetalle_venta']; ?></td>
+                                        <td><?php echo $detalleVenta['idRegistro_venta']; ?></td>
+                                        <td><?php echo $detalleVenta['idAccesorio']; ?></td>
+                                        <td><?php echo $detalleVenta['cantidadVenta']; ?></td>
+                                        <td><?php echo $detalleVenta['precioTotal']; ?></td>
+
                                         <td>
                                             <form method="post">
 
-                                                <input type="hidden" name="idRegistro_venta" id="idRegistro_venta" value="<?php echo $ventas['idRegistro_venta']; ?>">
+                                                <input type="hidden" name="idDetalle_venta" id="idDetalle_venta" value="<?php echo $detalleVenta['idDetalle_venta']; ?>">
                                                 <button type="submit" name="accion" value="editar" class="btn btn-small btn-primary mb-1"><i class=' bx bx-edit-alt'></i></button>
                                                 <button type="submit" onclick="return ConfirmDelete()" name="accion" value="borrar" class="btn btn-small btn-danger"><i class='bx bx-trash icon'></i></button>
 
+                                                <!-- <input type="submit" name="accion" value="borrar" class="btn btn-small btn-danger" <i class='bx bx-trash icon'></i></button> -->
 
 
                                             </form>
@@ -177,25 +192,35 @@ $listVentas = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class=" col-12 text-center">
-                            <h3>Datos de la Venta</h3>
+                            <h3>Datos del Detalle de Venta</h3>
                         </div>
 
                         <div class="col-12">
                             <form method="POST" enctype="multipart/form-data" class="justify-content-right">
                                 <div class=" form-group mb-3">
-                                    <label for="idRegistro_venta">ID Ventas</label>
-                                    <input type="text" value="<?php echo $idRegistro_venta; ?>" name="idRegistro_venta" id="idRegistro_venta" class="form-control " disabled>
+                                    <label for="idDetalle_venta">ID Detalle Venta</label>
+                                    <input type="text" value="<?php echo $idDetalle_venta; ?>" name="idDetalle_venta" id="idDetalle_venta" class="form-control " disabled>
                                 </div>
 
                                 <div class=" form-group mb-3">
-                                    <label for="idCliente">ID Cliente</label>
-                                    <input type="text" value="<?php echo $idCliente; ?>" name="idCliente" id="idCliente" class="form-control" required>
+                                    <label for="idRegistro_venta">ID Registro Venta</label>
+                                    <input type="text" value="<?php echo $idRegistro_venta; ?>" name="idRegistro_venta" id="idRegistro_venta" class="form-control" required>
                                 </div>
 
                                 <div class=" form-group mb-3">
-                                    <label class="form-label" for="fechaVenta">Fecha</label>
-                                    <input type="date" class="form-control" type="number" value="<?php echo $fechaVenta; ?>" id="fechaVenta" name="fechaVenta" for='fechaVenta' required></input>
+                                    <label for="idAccesorio">ID Accesorio</label>
+                                    <input type="text" value="<?php echo $idAccesorio; ?>" name="idAccesorio" id="idAccesorio" class="form-control" required>
                                 </div>
+                                <div class=" form-group mb-3">
+                                    <label for="cantidadVenta">Cantidad Venta</label>
+                                    <input type="text" value="<?php echo $cantidadVenta; ?>" name="cantidadVenta" id="cantidadVenta" class="form-control" required>
+                                </div>
+                                <div class=" form-group mb-3">
+                                    <label for="precioTotal">Precio Total</label>
+                                    <input type="text" value="<?php echo $precioTotal; ?>" name="precioTotal" id="precioTotal" class="form-control" required>
+                                </div>
+
+
 
 
                                 <div class="form-group text-center mt-3">

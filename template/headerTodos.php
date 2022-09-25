@@ -20,6 +20,7 @@ if (!isset($_SESSION['usuario'])) {
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
     <title>Sagu Manillas</title>
     <link rel="icon" type="image/x-icon" href="./image/logoSagu.png">
+    <link rel="stylesheet" href="style.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/bootstrap.min.css">
@@ -59,7 +60,3 @@ if (!isset($_SESSION['usuario'])) {
             </ul>
         </div>
     </nav>
-
-
-    <div class="container mt-3">
-        <div class="row">
